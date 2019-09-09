@@ -30,7 +30,7 @@ def linreg_summary(df):
     X = df.drop(['price'], axis=1)
 
     # Train-test split
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=8)
 
     # Instantiate and fit model
     model = LinearRegression()
@@ -64,6 +64,7 @@ def linreg_summary(df):
     
 # Statsmodels OLS version to see p-values
 def ols_linreg_summary(df):
+    
     """
     Return Statsmodels OLS model summary
     Return Residuals plot
