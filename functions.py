@@ -9,10 +9,13 @@ from statsmodels.formula.api import ols
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
 from math import sqrt
+from sklearn.model_selection import cross_val_score, cross_val_predict
 
 #normality check
 import scipy.stats as stats
 
+#plotting
+import matplotlib.pyplot as plt
 
 
 def linreg_summary(df):
@@ -67,8 +70,7 @@ def ols_linreg_summary(df):
     
     """
     Return Statsmodels OLS model summary
-    Return Residuals plot
-    
+
     """
     
     X = df.drop(['price'], axis=1)
@@ -77,8 +79,54 @@ def ols_linreg_summary(df):
     predictors_int = sm.add_constant(X)
     model = sm.OLS(y, predictors_int).fit()
     
-    residuals = model.resid
-    fig = sm.graphics.qqplot(residuals, dist=stats.norm, line='45', fit=True)
-    fig.show()
     
     return model.summary()
+
+
+
+def k_folds_cv(df):
+    
+    """
+    
+    Return Absolute Value K-Folds Cross Validation Results
+    Return K-Folds visualization of predictions obtained from model
+    
+    """
+    
+    model = LinearRegression()
+    X = df.drop(['price'], axis=1)
+    y = df['price']
+    
+    
+    cv_5_results = np.mean(abs(cross_val_score(model, X, y, cv=5, scoring="neg_mean_squared_error")))
+    cv_10_results = np.mean(abs(cross_val_score(model, X, y, cv=10, scoring="neg_mean_squared_error")))
+    cv_20_results = np.mean(abs(cross_val_score(model, X, y, cv=20, scoring="neg_mean_squared_error")))
+    
+    print(f"CV 5-Fold MSE: {cv_5_results}")
+    print(f"CV 10-Fold MSE: {cv_10_results}")
+    print(f"CV 20-Fold MSE: {cv_20_results}")
+    
+    
+    
+    predictions_5 = cross_val_predict(model, X, y, cv=5)
+    predictions_10 = cross_val_predict(model, X, y, cv=10)
+    predictions_20 = cross_val_predict(model, X, y, cv=20)
+
+    fig, ax = plt.subplots(1,3, figsize=(15,5))
+    ax[0].scatter(y, predictions_5, edgecolors=(0, 0, 0))
+    ax[0].plot([y.min(), y.max()], [y.min(), y.max()], 'k--', lw=4)
+    ax[0].set_title('K-Folds (5) test')
+    ax[0].set_xlabel('Measured')
+    ax[0].set_ylabel('Predicted')
+    ax[1].scatter(y, predictions_10, edgecolors=(0, 0, 0))
+    ax[1].plot([y.min(), y.max()], [y.min(), y.max()], 'k--', lw=4)
+    ax[1].set_title('K-Folds (10) test')
+    ax[1].set_xlabel('Measured')
+    ax[1].set_ylabel('Predicted')
+    ax[2].scatter(y, predictions_20, edgecolors=(0, 0, 0))
+    ax[2].plot([y.min(), y.max()], [y.min(), y.max()], 'k--', lw=4)
+    ax[2].set_title('K-Folds (20) test')
+    ax[2].set_xlabel('Measured')
+    ax[2].set_ylabel('Predicted')
+    plt.show()
+    
