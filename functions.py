@@ -13,9 +13,60 @@ from sklearn.model_selection import cross_val_score, cross_val_predict
 
 #normality check
 import scipy.stats as stats
+import statsmodels.formula.api as smf
+import statsmodels.stats.api as sms
 
 #plotting
 import matplotlib.pyplot as plt
+import seaborn as sns
+plt.style.use('fivethirtyeight')
+
+
+
+
+def normality_check(df):
+    """
+    
+    Fit Linear Regression model on each independent variable
+    Return Jarque Bera, P-Value, Skew, and Kurtosis measures
+    Return QQ-Plot and Histogram of residuals
+    
+    
+    """
+    predictors = df.drop('price', axis=1)
+
+    for i in predictors:
+    
+        f = 'price~' + i
+    
+        model = smf.ols(formula=f, data=df).fit()
+        resid = model.resid
+    
+        name = ['Jarque-Bera','Prob','Skew', 'Kurtosis']
+        test = sms.jarque_bera(model.resid)
+        print(i)
+        print(list(zip(name, test)))
+        print(f"Redisuals MIN: {round(resid.min(), 2)}")
+        print(f"Redisuals MAX: {round(resid.max(), 2)}")
+    
+        plt.figure() 
+        sm.graphics.qqplot(resid, 
+                           dist=stats.norm, 
+                           line='45', 
+                           fit=True)
+        plt.title(i)
+        plt.show()
+        plt.close()
+    
+        plt.figure()
+        resid.hist(bins=(50), 
+                   edgecolor = 'black', 
+                   range=(resid.min(), resid.max()),
+                   figsize=(10, 5))
+        plt.show()
+        plt.close()
+
+
 
 
 def linreg_summary(df):
@@ -129,4 +180,10 @@ def k_folds_cv(df):
     ax[2].set_xlabel('Measured')
     ax[2].set_ylabel('Predicted')
     plt.show()
+    
+    
+    
+    
+    
+    
     
