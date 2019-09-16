@@ -111,8 +111,8 @@ def linreg_summary(df):
     print(f"MAE: {test_mae}")
     
     # Mean Squared Error for train data to be used for comparison
-    train_mse = mean_squared_error(y_train, y_hat_train)
-    print(f"TRAIN_MSE: {train_mse}")
+    train_mae = mean_absolute_error(y_train, y_hat_train)
+    print(f"TRAIN_MAE: {train_mae}")
     
     
     
