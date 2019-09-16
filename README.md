@@ -38,9 +38,11 @@ This workflow can be viewed in the ['eda_model.ipynb'](https://github.com/mandoi
 ## Modeling
 Machine Learning model used was Multiple Linear Regression. I utilized CRISP-DM process in this project. Reiterating the process until satisfactory evaluation results were achieved. 
 <br/>
-![Alt text](images/crispdm.png?raw=true "Title")   
+![CRISP-DM](https://github.com/mandoiwanaga/kingcounty_housing_analysis/blob/master/images/crispdm.png)  
+- Image from Learn.co
 
 ## Evaluating
+For this model I've decided to use MAE (Mean Absolute Error) as my metric for evaluation.  
 
 ## Future Work
 - Incorporate location better, conduct more eda to discover other locations, other than downtown Seattle, that influence housing prices
