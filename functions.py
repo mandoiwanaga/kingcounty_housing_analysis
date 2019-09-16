@@ -149,13 +149,13 @@ def k_folds_cv(df):
     y = df['price']
     
     
-    cv_5_results = np.mean(abs(cross_val_score(model, X, y, cv=5, scoring="neg_mean_squared_error")))
-    cv_10_results = np.mean(abs(cross_val_score(model, X, y, cv=10, scoring="neg_mean_squared_error")))
-    cv_20_results = np.mean(abs(cross_val_score(model, X, y, cv=20, scoring="neg_mean_squared_error")))
+    cv_5_results = np.mean(abs(cross_val_score(model, X, y, cv=5, scoring="neg_mean_absolute_error")))
+    cv_10_results = np.mean(abs(cross_val_score(model, X, y, cv=10, scoring="neg_mean_absolute_error")))
+    cv_20_results = np.mean(abs(cross_val_score(model, X, y, cv=20, scoring="neg_mean_absolute_error")))
     
-    print(f"CV 5-Fold MSE: {cv_5_results}")
-    print(f"CV 10-Fold MSE: {cv_10_results}")
-    print(f"CV 20-Fold MSE: {cv_20_results}")
+    print(f"CV 5-Fold MAE: {cv_5_results}")
+    print(f"CV 10-Fold MAE: {cv_10_results}")
+    print(f"CV 20-Fold MAE: {cv_20_results}")
     
     
     
