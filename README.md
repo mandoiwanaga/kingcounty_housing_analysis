@@ -34,8 +34,7 @@ Assumptions of Linear Regression:
 
 
 <br/>
-This workflow can be viewed in the [eda_model.ipynb](https://github.com/mandoiwanaga/kingcounty_housing_analysis/blob/master/eda_model.ipynb)
-notebook. 
+This workflow can be viewed in eda_model.ipynb.
 
 
 ## Modeling
