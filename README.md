@@ -14,6 +14,7 @@ The dataset contains 21613 observations of homes sold with 19 house features alo
 After conducting exploratory data analysis, several tasks needed to be completed before training a model with this dataset.  
 <br/>
 Tasks included:
+
 - dealing with missing values
 - dealing with placeholder values
 - dealing with datatypes
@@ -25,14 +26,16 @@ Tasks included:
 - fulfilling Linear Regression Assumptions
 
 <br/>
-Assumptions of Linear Regression
+Assumptions of Linear Regression:
+
 - Linearity 
 - Normality (Residuals)
 - Homoscedasticity
 
 
 <br/>
-This workflow can be viewed in the ['eda_model.ipynb'](https://github.com/mandoiwanaga/kingcounty_housing_analysis/blob/master/eda_model.ipynb)  notebook. 
+This workflow can be viewed in the [eda_model.ipynb](https://github.com/mandoiwanaga/kingcounty_housing_analysis/blob/master/eda_model.ipynb)
+notebook. 
 
 
 ## Modeling
