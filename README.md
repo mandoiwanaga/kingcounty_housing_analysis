@@ -44,7 +44,7 @@ Machine Learning model used was Multiple Linear Regression. I utilized CRISP-DM 
 - Image from Learn.co
 
 ## Evaluating
-For this model I've decided to use MAE (Mean Absolute Error) as my metric for evaluation.  
+For this model I've decided to use MAE (Mean Absolute Error) as my metric for evaluation. I chose MAE because I decided to include outliers in the dataset. 
 
 ## Future Work
 - Incorporate location better, conduct more eda to discover other locations, other than downtown Seattle, that influence housing prices
